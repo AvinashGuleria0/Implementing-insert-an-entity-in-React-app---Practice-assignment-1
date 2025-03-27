@@ -6,7 +6,7 @@ import BookCard from "./BookCard";
 import books from "../booksData";
 import "./Home.css"; // Import the CSS for styling
 
-const Home = () => {
+const Home = ({books}) => {
 
   const navigate = useNavigate();
 

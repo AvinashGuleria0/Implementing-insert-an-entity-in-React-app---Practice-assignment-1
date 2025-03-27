@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
 
 
-const AddBook = () => {
+const AddBook = ({addBook}) => {
     const navigate = useNavigate();
 
     const [book, setBook] = useState({
@@ -13,13 +13,15 @@ const AddBook = () => {
     });
 
     const handleChange = (e) => {
-        setBook({...book, [e.target.name]: e.target.value});    
+        const {name, value} = e.target;
+        setBook({...book, [name]: value});    
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(`Submitted Book`, book);
-        navigate('/');
+        addBook(book);
+        alert("Book added successfully!");
+        navigate("/");
     }
     
     return(
@@ -29,9 +31,9 @@ const AddBook = () => {
                 <input name="title" placeholder="Title" type="text" value={book.title} onChange={handleChange} required />
                 <input name="author" placeholder="Author" type="text" value={book.author} onChange={handleChange} required />
                 <textarea name="description" placeholder="description" id="" value={book.description} onChange={handleChange} required></textarea>
-                <input name="coverImage" placeholder="Image url" type="text" value={book.coverImage} onChange={handleChange} required/>
+                <input name="coverImage" placeholder="Image url" type="url" value={book.coverImage} onChange={handleChange} required/>
                 <button type="submit">Submit</button>
-            </form>
+            </form>q
         </div>
     )
 }
